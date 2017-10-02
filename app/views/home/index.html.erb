@@ -1,1 +1,10 @@
-<h1>Hello world!</h1>
+<%= link_to 'Generate a random quote!', root_path, class: 'btn btn-outline-info' %>
+
+<p></p>
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"><%= @quote.author %></h4>
+    <p class="card-text"><%= @quote.text %></p>
+  </div>
+</div>
