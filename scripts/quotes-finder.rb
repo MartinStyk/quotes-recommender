@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 require 'set'
-require "csv"
+require 'csv'
 
 class Quote
   attr_reader :text
@@ -17,7 +17,7 @@ class Quote
   end
 
   def to_s
-    @text + '('+ @author +')'
+    @text + '(' + @author + ')'
   end
 
   def ==(other)
@@ -37,16 +37,14 @@ class Quote
   def state
     [@text, @author]
   end
-
 end
-
 
 quotes = Set.new
 
 while quotes.size != 1800
 
   # Get quote from public rest API. Use key request parameter to get random quotes
-  url = 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en&key=' + 6.times.map {rand(10)}.join
+  url = 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en&key=' + 6.times.map { rand(10) }.join
   uri = URI(url)
   response = Net::HTTP.get(uri)
 
@@ -54,7 +52,7 @@ while quotes.size != 1800
   begin
     json = JSON.parse(response)
   rescue
-    puts "Unable to parse response " + response
+    puts 'Unable to parse response ' + response
     next
   end
 
@@ -64,16 +62,9 @@ while quotes.size != 1800
   puts quotes.size
 end
 
-CSV.open("quotes.csv", "wb") do |csv|
+CSV.open('quotes.csv', 'wb') do |csv|
+  csv << %w[text author]
   quotes.each do |q|
     csv << [q.text, q.author]
   end
 end
-
-
-
-
-
-
-
-
