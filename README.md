@@ -19,5 +19,6 @@ In order to set up your environment please follow the instructions provided [her
 ### Development
 
 * `cd` to the root directory of the project
+* Run `bundle install` to install missing gems
 * Run `rails db:migrate` to initialize the database
 * Run `rails server` >> <http://localhost:3000/>
