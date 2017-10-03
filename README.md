@@ -4,7 +4,7 @@ Project for course PV254 Recommender Systems. Web application for recommending q
 Web based recommender application which recommends quotes.
 
 
-The aim of this project is to implement recommendation algorithms. Database of 1800 quotes was obtained from http://forismatic.com. 
+The aim of this project is to implement recommendation algorithms. Database of 9300 quotes was obtained from https://www.brainyquote.com. 
 Web app is implemented in Ruby on Rails.
 
 ### Environment preparation
