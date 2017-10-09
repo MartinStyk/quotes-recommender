@@ -21,6 +21,11 @@
     <%= form.text_area :text, id: :quote_text %>
   </div>
 
+  <div class="field">
+    <%= form.label :category %>
+    <%= collection_check_boxes(:quote, :category_ids, @categories, :id, :name) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

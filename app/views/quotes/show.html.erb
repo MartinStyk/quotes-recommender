@@ -8,5 +8,10 @@
   <%= @quote.text %>
 </p>
 
+<p>
+  <strong>Categories:</strong>
+  <%= @quote.categories.map {|cat| cat.name}.join(', ') %>
+</p>
+
 <%= link_to 'Edit', edit_quote_path(@quote) %> |
 <%= link_to 'Back', quotes_path %>

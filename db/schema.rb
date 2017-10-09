@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930090914) do
+ActiveRecord::Schema.define(version: 20171008150207) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_quotes", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "quote_id", null: false
+    t.index ["category_id", "quote_id"], name: "index_categories_quotes_on_category_id_and_quote_id"
+    t.index ["quote_id", "category_id"], name: "index_categories_quotes_on_quote_id_and_category_id"
+  end
 
   create_table "quotes", force: :cascade do |t|
     t.string "author"

@@ -14,7 +14,23 @@ puts '**  Seeding Database: seeding ***'
 puts 'Importing file ' + filename
 
 CSV.foreach(filename, headers: true) do |row|
-  Quote.create!(row.to_h)
+  categories = []
+
+  # CSV.parse returns array of arrays
+  # e.g. [['category1', 'category2']]
+  CSV.parse(row.to_h['categories']).first.each do |category|
+    categories << Category.find_or_create_by!(name: category)
+  end
+
+  quote_hash = Hash['author' => row.to_h['author'],
+                    'text' => row.to_h['text'],
+                    'categories' => categories]
+
+  Quote.create!(quote_hash)
+
+  # Just to identify progress
+  printf("\rParsing line: %d", $INPUT_LINE_NUMBER)
 end
 
+puts
 puts '**  Seeding Database: completed ***'
