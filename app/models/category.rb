@@ -4,5 +4,5 @@ class Category < ApplicationRecord
   validates :name,
             presence: { message: 'cannot be empty.' },
             uniqueness: true
-  
+
 end
