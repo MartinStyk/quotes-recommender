@@ -24,4 +24,6 @@
   </tbody>
 </table>
 
-<%= link_to 'New Quote', new_quote_path %>
+<% if current_user.has_role? :admin %>
+  <%= link_to 'New Quote', new_quote_path %>
+<% end %>

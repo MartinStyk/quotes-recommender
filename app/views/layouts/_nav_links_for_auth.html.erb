@@ -1,7 +1,9 @@
 <% if user_signed_in? %>
+  <% if current_user.has_role? :admin %>
     <li class="nav-item">
       <a class="nav-link" href=<%= users_path %>>Users</a>
     </li>
+  <% end %>
 <% end %>
 
 <% if user_signed_in? %>
