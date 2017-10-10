@@ -23,3 +23,22 @@ In order to set up your environment please follow the instructions provided [her
 * Run `rails db:migrate` to initialize the database schema
 * Run `rails db:seed` to insert data into the database
 * Run `rails server` >> <http://localhost:3000/>
+
+### Setup
+
+To initialize an _admin_ user in the system, run the following:
+
+* `cd` to the root directory of the project
+* Run `rails console` to start console for rails
+* Create a user and add an admin role:
+
+```ruby
+> user = User.new
+> user.email = 'admin@admin.admin'
+> user.password = 'adminadmin'
+> user.add_role :admin
+> user.save
+# Because _user_ default role is assigned after create
+> user.remove_role :user
+```
+* You are done. (You can leave the `console` by pressing `Ctrl^D`)
