@@ -8,6 +8,7 @@ end
 gem 'devise'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
+gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
 gem 'cancancan', '~> 2.0'
 gem 'rolify'
 gem 'omniauth-google-oauth2'
@@ -35,7 +36,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'bcrypt', platforms: :ruby
+#windows fix
+gem 'wdm'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -13,7 +13,21 @@
         <cite title="Source Title"><%= @quote.author if @quote %></cite>
         <cite title="Ratings"><%= @quote.ratings.map {|rat| rat.user_rating}.join(', ') if  @quote.ratings %>
         </cite>
+        <div id="user_star"></div>
       </footer>
     </blockquote>
   </div>
 </div>
+
+<script>
+    $('#user_star').raty({
+        path: '/assets',
+        click: function (user_rating, evt) {
+            $.ajax({
+                url: '/ratings/' + <%= @quote.id %>,
+                type: 'PATCH',
+                data: {user_rating: user_rating }
+            });
+        }
+    });
+</script>

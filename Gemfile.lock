@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/bmc/jquery-raty-rails.git
+  revision: a4fb8a9cc7d0b20ab4c0b8d0a6480dd31d4a8c26
+  specs:
+    jquery-raty-rails (0.0.2)
+      rails (>= 3.2.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -221,6 +228,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
+    wdm (0.1.1)
     web-console (3.5.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -236,6 +244,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  bcrypt
   better_errors
   binding_of_caller
   bootstrap (~> 4.0.0.beta)
@@ -246,6 +255,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.5)
   jquery-rails
+  jquery-raty-rails!
   listen (>= 3.0.5, < 3.2)
   omniauth-google-oauth2
   puma (~> 3.7)
@@ -259,6 +269,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
+  wdm
   web-console (>= 3.3.0)
 
 BUNDLED WITH
