@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   rolify
   after_create :assign_default_role
+  has_many :ratings
+  has_many :quotes, :through => :ratings
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -11,6 +11,8 @@
       <p><%= @quote.text if @quote %></p>
       <footer class="blockquote-footer">
         <cite title="Source Title"><%= @quote.author if @quote %></cite>
+        <cite title="Ratings"><%= @quote.ratings.map {|rat| rat.user_rating}.join(', ') if  @quote.ratings %>
+        </cite>
       </footer>
     </blockquote>
   </div>
