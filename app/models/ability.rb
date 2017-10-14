@@ -9,6 +9,7 @@ class Ability
       can :manage, :all
     else
       can :read, Quote
+      can :manage, Rating, user: user
     end
     #
     # The first argument to `can` is the action you are giving the user

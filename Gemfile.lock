@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/bmc/jquery-raty-rails.git
-  revision: a4fb8a9cc7d0b20ab4c0b8d0a6480dd31d4a8c26
-  specs:
-    jquery-raty-rails (0.0.2)
-      rails (>= 3.2.3)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -50,6 +43,7 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (7.1.5)
       execjs
+    bcrypt (3.1.11)
     bcrypt (3.1.11-x64-mingw32)
     better_errors (2.3.0)
       coderay (>= 1.0.0)
@@ -95,6 +89,7 @@ GEM
     execjs (2.7.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.18)
     ffi (1.9.18-x64-mingw32)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
@@ -128,6 +123,8 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     nio4r (2.1.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     nokogiri (1.8.1-x64-mingw32)
       mini_portile2 (~> 2.3.0)
     oauth2 (1.4.0)
@@ -213,6 +210,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.3.13)
     sqlite3 (1.3.13-x64-mingw32)
     thor (0.20.0)
     thread_safe (0.3.6)
@@ -241,6 +239,7 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES
@@ -255,7 +254,6 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.5)
   jquery-rails
-  jquery-raty-rails!
   listen (>= 3.0.5, < 3.2)
   omniauth-google-oauth2
   puma (~> 3.7)

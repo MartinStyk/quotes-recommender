@@ -2,6 +2,12 @@ class QuotesController < ApplicationController
   before_action :set_quote, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
+  # Skeleton for recommend method
+  # `recommend_quote` should be implemented in the User model
+  def recommend
+    @quote = current_user.recommend_quote
+  end
+
   # GET /quotes
   # GET /quotes.json
   def index

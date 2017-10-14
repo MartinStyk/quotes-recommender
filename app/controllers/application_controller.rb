@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  # `prepend: true` because of 'Can't verify CSRF token authenticity.'??
+  protect_from_forgery prepend: true, with: :exception
   rescue_from ActiveRecord::RecordNotFound, with: :show_alert
 
   rescue_from CanCan::AccessDenied do |exception|

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   rolify
   after_create :assign_default_role
   has_many :ratings
-  has_many :quotes, :through => :ratings
+  has_many :quotes, through: :ratings
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -26,5 +26,10 @@ class User < ApplicationRecord
       )
     end
     user
+  end
+
+  def recommend_quote
+    # Recommend a random quote
+    Quote.offset(rand(Quote.count)).first
   end
 end

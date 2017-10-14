@@ -11,13 +11,42 @@
       <p><%= @quote.text if @quote %></p>
       <footer class="blockquote-footer">
         <cite title="Source Title"><%= @quote.author if @quote %></cite>
-        <cite title="Ratings"><%= @quote.ratings.map {|rat| rat.user_rating}.join(', ') if  @quote.ratings %>
-        </cite>
-        <div id="user_star"></div>
       </footer>
+      <p>
+        <div id="user_star"></div>
+      </p>
     </blockquote>
   </div>
 </div>
+
+<p></p>
+
+<!-- example form for rating -->
+<% if @rating.persisted? %>
+  <%= form_with(model: @rating, local: true) do |form| %>
+    <% if @rating.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@rating.errors.count, "error") %> prohibited this rating from being saved:</h2>
+
+          <ul>
+            <% @rating.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :rating %>
+      <%= form.select :user_rating, [1,2,3,4,5].collect { |n| [n, n] } %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% end %>
+
 
 <script>
     $('#user_star').raty({
@@ -28,6 +57,11 @@
                 type: 'PATCH',
                 data: {user_rating: user_rating }
             });
+            alert('ID: ' + this.id +
+                "\nscore: " + user_rating +
+                "\nevent: " + evt +
+                "\nquote id: " + <%= @quote.id %> +
+                "\n");
         }
     });
 </script>
