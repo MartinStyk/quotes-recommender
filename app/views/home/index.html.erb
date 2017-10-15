@@ -36,14 +36,6 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= form.label :rating %>
-      <%= form.select :user_rating, [1,2,3,4,5].collect { |n| [n, n] } %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit %>
-    </div>
   <% end %>
 <% end %>
 
@@ -54,6 +46,7 @@
         click: function (user_rating, evt) {
             $.ajax({
                 url: '/ratings/' + <%= @quote.id %>,
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
                 type: 'PATCH',
                 data: {user_rating: user_rating }
             });
