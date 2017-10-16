@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013093229) do
+ActiveRecord::Schema.define(version: 20171016182214) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20171013093229) do
     t.string "name"
     t.string "oauth_token"
     t.datetime "oauth_expires_at"
+    t.integer "strategy", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
