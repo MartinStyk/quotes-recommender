@@ -15,8 +15,6 @@ gem 'omniauth-google-oauth2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -47,6 +45,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+
   gem 'selenium-webdriver'
 end
 
@@ -59,6 +60,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
   gem 'binding_of_caller'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
