@@ -145,6 +145,7 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    pg (0.21.0)
     popper_js (1.11.1)
     public_suffix (3.0.0)
     puma (3.10.0)
@@ -256,6 +257,7 @@ DEPENDENCIES
   jquery-rails
   listen (>= 3.0.5, < 3.2)
   omniauth-google-oauth2
+  pg
   puma (~> 3.7)
   rails (~> 5.1.4)
   rolify
