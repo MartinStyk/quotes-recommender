@@ -19,7 +19,7 @@
 
     <div class="field">
       <%= form.label :strategy %>
-      <%= form.select :strategy, { 'random' => 'random', 'str1' => 'strategy1' } %>
+      <%= form.select :strategy, User.strategies.map {|k, v| [k.humanize.capitalize, k]} %>
     </div>
 
     <div class="actions">
