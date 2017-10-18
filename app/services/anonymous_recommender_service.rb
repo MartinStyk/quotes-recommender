@@ -10,6 +10,7 @@ class AnonymousRecommenderService < RecommenderService
   end
 
   def recommend_next
-    @quote = Quote.offset(rand(Quote.count)).first
+    # TODO
+    @quote = Quote.all.first
   end
 end

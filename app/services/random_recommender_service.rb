@@ -6,6 +6,7 @@ class RandomRecommenderService < RecommenderService
   end
 
   def recommend_next
+    # TODO
     @quote = Quote.offset(rand(Quote.count)).first
   end
 end
