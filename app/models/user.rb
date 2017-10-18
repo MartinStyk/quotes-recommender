@@ -3,6 +3,8 @@ class User < ApplicationRecord
   after_create :assign_default_role
   has_many :ratings
   has_many :quotes, through: :ratings
+  has_many :viewed_quotes
+  has_many :quotes, through: :viewed_quotes
   enum strategy: [ :random, :strategy1, :strategy2 ]
 
   # Include default devise modules. Others available are:

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @quote = Quote.offset(rand(Quote.count)).first
+    @quote = RecommendQuote.call(user: current_user).result
 
     if user_signed_in? && current_user
       @rating = Rating.find_or_initialize_by(quote_id: @quote.id,

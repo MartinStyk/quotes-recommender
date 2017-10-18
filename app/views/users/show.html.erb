@@ -1,8 +1,9 @@
 <h3>User</h3>
 
-<p>Email: <%= current_user.email %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 
+<p>Viewed quotes: <%= @user.viewed_quotes.size %></p>
+<p>Ratings: <%= @user.ratings.size %></p>
 
 <%= form_with(model: @user, local: true) do |form| %>
     <% if @user.errors.any? %>

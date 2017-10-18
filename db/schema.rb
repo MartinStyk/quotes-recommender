@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016182214) do
+ActiveRecord::Schema.define(version: 20171017135737) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 20171016182214) do
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
+  create_table "viewed_quotes", id: false, force: :cascade do |t|
+    t.integer "quote_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quote_id"], name: "index_viewed_quotes_on_quote_id"
+    t.index ["user_id"], name: "index_viewed_quotes_on_user_id"
   end
 
 end
