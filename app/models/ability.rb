@@ -9,6 +9,7 @@ class Ability
       can :manage, :all
     else
       can :read, Quote
+      can :read, ViewedQuote
       can :manage, Rating, user: user
     end
     #
