@@ -2,10 +2,10 @@
 <li>
   <a class="nav-link" href=<%= quotes_path %>>Quotes</a>
 </li>
-<li>
-  <a class="nav-link" href=<%= viewed_quotes_path %>>Viewed Quotes</a>
-</li>
 <% if user_signed_in? %>
+  <li>
+    <a class="nav-link" href=<%= viewed_quotes_path %>>Viewed Quotes</a>
+  </li>
   <% if current_user.has_role? :admin %>
     <li>
       <a class="nav-link" href=<%= categories_path %>>Categories</a>

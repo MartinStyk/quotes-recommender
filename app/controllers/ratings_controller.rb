@@ -1,10 +1,7 @@
 class RatingsController < ApplicationController
-  def update
-    unless current_user
-      redirect_to root_path
-      return
-    end
+  before_action :authenticate_user!
 
+  def update
     @quote = Quote.find(params[:id])
     @rating = Rating.find_or_create_by!(quote_id: @quote.id, user_id: current_user.id)
 
