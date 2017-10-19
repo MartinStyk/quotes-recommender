@@ -14,15 +14,16 @@
 
     <div class="container-fluid">
       <% flash.each do |key, value| %>
-          <% if key == "notice" %>
-            <% key = "info" %>
-          <% end %>
-          <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <%= value %>
-          </div>
+        <% case key %>
+        <% when 'alert' then key = 'warning' %>
+        <% when 'notice' then key = 'info' %>
+        <% end %>
+        <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <%= value %>
+        </div>
       <% end %>
 
       <%= yield %>
