@@ -2,12 +2,6 @@ class QuotesController < ApplicationController
   before_action :set_quote, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
-  # Skeleton for recommend method
-  # `recommend_quote` should be implemented in the User model
-  def recommend
-    @quote = current_user.recommend_quote
-  end
-
   # GET /quotes
   # GET /quotes.json
   def index
@@ -71,13 +65,14 @@ class QuotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_quote
-      @quote = Quote.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def quote_params
-      params.require(:quote).permit(:author, :text, category_ids: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_quote
+    @quote = Quote.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def quote_params
+    params.require(:quote).permit(:author, :text, category_ids: [])
+  end
 end

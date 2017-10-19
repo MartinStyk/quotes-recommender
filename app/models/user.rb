@@ -30,9 +30,4 @@ class User < ApplicationRecord
     end
     user
   end
-
-  def recommend_quote
-    # Recommend a random quote
-    Quote.offset(rand(Quote.count)).first
-  end
 end
