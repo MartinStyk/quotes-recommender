@@ -26,6 +26,8 @@ In order to set up your environment please follow the instructions provided [her
 
 ### Setup
 
+#### Admin
+
 To initialize an _admin_ user in the system, run the following:
 
 * `cd` to the root directory of the project
@@ -42,3 +44,19 @@ To initialize an _admin_ user in the system, run the following:
 > user.remove_role :user
 ```
 * You are done. (You can leave the `console` by pressing `Ctrl^D`)
+
+#### Google authentication
+
+Exporting the following environment variables is needed to use Google authentication
+```
+GOOGLE_CLIENT_ID = <your client ID>
+GOOGLE_CLIENT_SECRET = <your client secret>.
+```
+
+#### Facebook authentication
+
+Exporting the following environment variables is needed to use Facebook authentication
+```
+APP_ID = <your application ID>
+APP_SECRET <your application secret>
+```

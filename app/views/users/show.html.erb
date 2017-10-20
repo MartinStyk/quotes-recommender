@@ -27,3 +27,9 @@
       <%= form.submit %>
     </div>
 <% end %>
+
+<p>Name: <%= @user.name if @user.name %></p>
+
+<p>
+  Provider: <%= @user.identities.map {|identity| identity.provider }.join(', ') %>
+</p>

@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20171017135737) do
     t.index ["quote_id", "category_id"], name: "index_categories_quotes_on_quote_id_and_category_id"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_identities_on_user_id"
+  end
+
   create_table "quotes", force: :cascade do |t|
     t.string "author"
     t.text "text"
@@ -67,11 +76,7 @@ ActiveRecord::Schema.define(version: 20171017135737) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
     t.string "name"
-    t.string "oauth_token"
-    t.datetime "oauth_expires_at"
     t.integer "strategy", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
