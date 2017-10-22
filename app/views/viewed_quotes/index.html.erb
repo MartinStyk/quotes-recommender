@@ -3,6 +3,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>Count</th>
       <th>Author</th>
       <th>Text</th>
       <th>Categories</th>
@@ -11,8 +12,9 @@
   </thead>
 
   <tbody>
-    <% @quotes.each do |quote| %>
+    <% @quote_count_hash.each do |quote, count| %>
       <tr>
+        <td><%= count %></td>
         <td><%= quote.author %></td>
         <td><%= quote.text %></td>
         <td><%= quote.categories.map {|cat| cat.name}.join(', ') %></td>
