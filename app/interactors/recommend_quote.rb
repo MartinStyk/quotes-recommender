@@ -6,12 +6,12 @@ class RecommendQuote
     recommend_strategy = if user.nil?
                            AnonymousRecommenderService.new(user)
                          else
-                           case user.strategy
-                           when 'random'
+                           case
+                           when user.random?
                              RandomRecommenderService.new(user)
-                           when 'strategy1'
+                           when user.strategy1?
                              AnonymousRecommenderService.new(user)
-                           when 'strategy2'
+                           when user.strategy2?
                              AnonymousRecommenderService.new(user)
                            end
                          end
