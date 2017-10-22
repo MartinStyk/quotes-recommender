@@ -6,5 +6,6 @@ class ViewedQuotesController < ApplicationController
     viewed_quotes = ViewedQuote.where(user_id: current_user.id)
     @quote_count_hash = viewed_quotes.group_by(&:quote_id)
                                      .map { |quote_id, quotes| [Quote.find(quote_id), quotes.size] }.to_h
+    @quote_count_hash = @quote_count_hash.sort_by { |_k, v| v }.reverse
   end
 end
