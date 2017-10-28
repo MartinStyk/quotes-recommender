@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :quotes, through: :ratings
   has_many :viewed_quotes
   has_many :quotes, through: :viewed_quotes
+  has_many :user_category_preferences
+  has_many :categories, through: :user_category_preferences
   enum strategy: [ :random, :strategy1, :strategy2 ]
 
   # Include default devise modules. Others available are:
