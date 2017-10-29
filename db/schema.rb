@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20171028135737) do
   create_table "user_category_preference", id: false, force: :cascade do |t|
     t.integer "category_id"
     t.integer "user_id"
-    t.integer "preference"
+    t.float "preference"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_user_category_preference_on_category_id"
