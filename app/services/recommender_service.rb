@@ -10,6 +10,8 @@ class RecommenderService
     @quote
   end
 
+  # selects best quote for current user
+  # meant to be overridden by subclasses
   def recommend_next
     raise NotImplementedError
   end
