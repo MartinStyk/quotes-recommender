@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20171028135737) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "user_category_preferences", id: false, force: :cascade do |t|
+  create_table "user_category_preferences", force: :cascade do |t|
     t.integer "category_id"
     t.integer "user_id"
     t.float "preference"

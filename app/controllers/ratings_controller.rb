@@ -34,13 +34,12 @@ class RatingsController < ApplicationController
       adjustment_value = rating.user_rating / Math.sqrt(@quote.categories.size)
 
       if @user_category_preference.preference.present?
-        @user_category_preference.preference = decrement ? @user_category_preference.preference - adjustment_value : @user_category_preference.preference + adjustment_value
+        preference_value = decrement ? @user_category_preference.preference - adjustment_value : @user_category_preference.preference + adjustment_value
       else
-        @user_category_preference.preference = adjustment_value
+        preference_value = adjustment_value
       end
 
-      #TODO ArgumentError - When assigning attributes, you must pass a hash as an argument.:
-      UserCategoryPreference.update(@user_category_preference.hash)
+      @user_category_preference.update(preference: preference_value)
     end
   end
 
