@@ -4,23 +4,26 @@ class RatingsController < ApplicationController
   def update
     @quote = Quote.find(params[:id])
 
-    # in case we edit already existing rating, we need to adjust categories preferences for current user
-    # we need to decrement it
-    if Rating.exists?(quote_id: @quote.id, user_id: current_user.id)
-      adjust_user_category_preference Rating.find_by(quote_id: @quote.id, user_id: current_user.id), true
-    end
+    Rating.transaction do
 
-    @rating = Rating.find_or_create_by!(quote_id: @quote.id, user_id: current_user.id)
+      # in case we edit already existing rating, we need to adjust categories preferences for current user
+      # we need to decrement it
+      if Rating.exists?(quote_id: @quote.id, user_id: current_user.id)
+        adjust_user_category_preference Rating.find_by(quote_id: @quote.id, user_id: current_user.id), true
+      end
 
-    respond_to do |format|
-      if @rating.update(user_rating: params[:user_rating])
-        adjust_user_category_preference
-        format.html
-        format.json {render :show, status: :ok, location: root_path}
-        format.js
-      else
-        format.html {redirect_to root_path, notice: 'Rating was NOT successfully updated.'}
-        format.json {render json: @rating.errors, status: :unprocessable_entity}
+      @rating = Rating.find_or_create_by!(quote_id: @quote.id, user_id: current_user.id)
+
+      respond_to do |format|
+        if @rating.update(user_rating: params[:user_rating])
+          adjust_user_category_preference
+          format.html
+          format.json {render :show, status: :ok, location: root_path}
+          format.js
+        else
+          format.html {redirect_to root_path, notice: 'Rating was NOT successfully updated.'}
+          format.json {render json: @rating.errors, status: :unprocessable_entity}
+        end
       end
     end
   end
