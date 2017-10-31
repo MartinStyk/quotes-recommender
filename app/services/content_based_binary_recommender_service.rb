@@ -30,25 +30,29 @@ class ContentBasedBinaryRecommenderService < RecommenderService
 
     score_board = Hash.new
 
-    #TODO minus last xxx quotes not all
     quotes = Quote.all - @user.viewed_quotes.map(&:quote)
 
+    user_preferred_categories = UserCategoryPreference.where(user_id: @user.id).to_a.map {|cat| [cat.id, cat.preference]}.to_h
+    quotes_in_category = Category.all.map {|c| [c.id, c.quotes.size]}.to_h
+
+    size = user_preferred_categories.size
+    
     quotes.each do |quote|
       score = 0
+      quote_categories_length = quote.categories.length
       quote.categories.each do |category|
 
-        # in case user has a preference for this category, use it
-        if UserCategoryPreference.exists?(category_id: category.id, user_id: @user.id)
-          score += UserCategoryPreference.find_by(category_id: category.id, user_id: @user.id).preference * 1/ Math.sqrt(quote.categories.length) *
-              Math.log10(quotes_size / Category.find(category.id).quotes.size)
+        current_category_preference = user_preferred_categories[category.id]
+        unless current_category_preference.nil?
+          score += current_category_preference * 1/ Math.sqrt(quote_categories_length) *
+              Math.log10(quotes_size / quotes_in_category[category.id])
         end
+
       end
-
       score_board[quote] = score
+
     end
-
     score_board.key(score_board.values.max)
+
   end
-
-
 end
