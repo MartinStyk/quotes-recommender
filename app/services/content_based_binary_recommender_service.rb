@@ -18,8 +18,6 @@ class ContentBasedBinaryRecommenderService < RecommenderService
   #
   # Quote with highest score is returned
   #
-  # TODO consider only unseen quotes?
-  #
   # TODO even bad rated category is currently better than non rated category
   # TODO consider normalizing user category preference? smthng like category_preference - average_user_category_preference?
   # TODO Normalized preference is updated with every user rating - it should not be stored in DB in RatingsController, I would
@@ -32,18 +30,21 @@ class ContentBasedBinaryRecommenderService < RecommenderService
 
     score_board = Hash.new
 
-    Quote.all.each do |quote|
+    #TODO minus last xxx quotes not all
+    quotes = Quote.all - @user.viewed_quotes.map(&:quote)
+
+    quotes.each do |quote|
       score = 0
       quote.categories.each do |category|
 
-        # in case user has a preference fir this category, use it
+        # in case user has a preference for this category, use it
         if UserCategoryPreference.exists?(category_id: category.id, user_id: @user.id)
-          score += UserCategoryPreference.find_by(category_id: category.id, user_id: @user.id).preference * 1/sqrt(quote.categories.length) *
-              Math.log10(quotes_size / Category.find(category.id).size);
+          score += UserCategoryPreference.find_by(category_id: category.id, user_id: @user.id).preference * 1/ Math.sqrt(quote.categories.length) *
+              Math.log10(quotes_size / Category.find(category.id).quotes.size)
         end
       end
 
-      score_board[:quote] = score
+      score_board[quote] = score
     end
 
     score_board.key(score_board.values.max)
