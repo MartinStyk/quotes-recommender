@@ -45,15 +45,16 @@ class ContentBasedBinaryRecommenderService < RecommenderService
 
     # for each quote which belongs to categories user has already preference, and user has not seen the
     # quote before, compute quote ranking as a sum(quote_in_category_ratio * user_preference_for_given_category * IDF)
-    user_preferred_categories.each do |cat_id, cat_preferrence|
+    user_preferred_categories.each do |cat_id, cat_preference|
       quotes_in_category = category_quotes[cat_id]
       considered_quotes = quotes_in_category - user_viewed_quotes
       considered_quotes.each do |quote|
         if score_board[quote].nil?
           score_board[quote] = 0
         end
-        # TODO use mapping quote -> number of quote categories instead of  quote.categories.size
-        score_board[quote] += cat_preferrence * 1/ Math.sqrt(quote.categories.size) *
+
+        cat_count = QuoteCategory.where(quote_id: quote.id).count
+        score_board[quote] += cat_preference * 1 / Math.sqrt(cat_count) *
             Math.log10(quotes_size / quotes_in_category.size)
       end
     end
