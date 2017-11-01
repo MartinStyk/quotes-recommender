@@ -24,6 +24,7 @@ class RatingsController < ApplicationController
           format.html {redirect_to root_path, notice: 'Rating was NOT successfully updated.'}
           format.json {render json: @rating.errors, status: :unprocessable_entity}
         end
+        head :no_content
       end
     end
   end
