@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
-  has_and_belongs_to_many :quotes
+  has_many :quote_categories
+  has_many :quotes, through: :quote_categories
   has_many :user_category_preferences
   has_many :users, through: :user_category_preferences
 
