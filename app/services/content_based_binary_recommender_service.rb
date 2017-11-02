@@ -73,25 +73,9 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     # if we dont know users preference, return random quote
     # this happens when there is no quote rating
     best_quote_id = Quote.offset(rand(Quote.count)).first  if best_quote_id.nil?
-    
+
     # return the result quote
     Quote.find best_quote_id
-
-    # quotes.each do |quote|
-    #   score = 0
-    #   quote_categories_length = quote.categories.length
-    #   quote.categories.each do |category|
-    #
-    #     current_category_preference = user_preferred_categories[category.id]
-    #     unless current_category_preference.nil?
-    #       score += current_category_preference * 1/ Math.sqrt(quote_categories_length) *
-    #           Math.log10(quotes_size / quotes_in_category[category.id])
-    #     end
-    #
-    #   end
-    #   score_board[quote] = score
-    #
-    # end
 
   end
 
