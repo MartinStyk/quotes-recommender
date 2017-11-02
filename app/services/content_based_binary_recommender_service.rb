@@ -45,8 +45,8 @@ class ContentBasedBinaryRecommenderService < RecommenderService
 
     # quote.id -> number of categories quote belongs to
     categories_of_quote = QuoteCategory.where(quote_id: QuoteCategory.where(category_id: user_preferred_categories.keys)
-                            .map {|quote_categeory| quote_categeory.quote_id})
-                            .group(:quote_id).count
+                                                            .map {|quote_categeory| quote_categeory.quote_id})
+                              .group(:quote_id).count
 
 
     # for each quote which belongs to categories user has already preference, and user has not seen it before
@@ -59,13 +59,11 @@ class ContentBasedBinaryRecommenderService < RecommenderService
       considered_quotes = quotes_in_current_category - user_viewed_quotes
 
       considered_quotes.each do |quote|
-        if score_board[quote].nil?
-          score_board[quote] = 0
-        end
+        score_board[quote] = 0 if score_board[quote].nil?
 
         score_board[quote] +=
             category_preference * 1 / Math.sqrt(categories_of_quote[quote]) *
-            Math.log10(size_all_quotes / quotes_in_current_category.size)
+                Math.log10(size_all_quotes / quotes_in_current_category.size)
       end
     end
 
@@ -74,10 +72,8 @@ class ContentBasedBinaryRecommenderService < RecommenderService
 
     # if we dont know users preference, return random quote
     # this happens when there is no quote rating
-    if best_quote_id.nil?
-      best_quote_id = Quote.offset(rand(Quote.count)).first
-    end
-
+    best_quote_id = Quote.offset(rand(Quote.count)).first  if best_quote_id.nil?
+    
     # return the result quote
     Quote.find best_quote_id
 
@@ -106,10 +102,10 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     category_quotes = {}
 
     category_quotes_temp.each do |category_id, quote_id|
-      if category_quotes[category_id].nil?
-        category_quotes[category_id] = []
-      end
+
+      category_quotes[category_id] = [] if category_quotes[category_id].nil?
       category_quotes[category_id] << quote_id
+
     end
   end
 
