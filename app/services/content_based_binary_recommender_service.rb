@@ -19,11 +19,10 @@ class ContentBasedBinaryRecommenderService < RecommenderService
   # Quote with highest score is returned. If there is no rated quote, random is returned
   #
   # TODO even bad rated category is currently better than non rated category
-  # TODO consider normalizing user category preference? smthng like category_preference - average_user_category_preference?
-  # TODO Normalized preference is updated with every user rating - it should not be stored in DB in RatingsController, I would
-  # TODO rather compute it right here
-  # TODO another option is to consider 1* as -2,...., 5* as +2 and we are done with this issue - this needs to be implemented
+  # TODO consider 1* as -2,...., 5* as +2 and we are done with this issue - this needs to be implemented
   # TODO ratings controller on user preferred category save
+  #
+  # TODO consider preference normalization?
   def recommend_next
 
     # quote.id -> expectation on how much user likes this quote
