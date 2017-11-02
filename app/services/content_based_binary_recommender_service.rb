@@ -60,7 +60,13 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     end
 
     # choose the best one
-    score_board.key(score_board.values.max)
+    best_quote = score_board.key(score_board.values.max)
+
+    # if there are no preferred categories (no ratings) yet for the user
+    # we have to return a random quote
+    return (Quote.all - user_viewed_quotes).sample if best_quote.nil?
+    # otherwise return the best quote
+    best_quote
 
     # quotes.each do |quote|
     #   score = 0
