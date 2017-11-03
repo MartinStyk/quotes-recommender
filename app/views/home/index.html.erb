@@ -1,5 +1,3 @@
-<%= link_to 'Generate a random quote!', root_path, class: 'btn btn-outline-info' %>
-
 <p></p>
 
 <div class="card">
@@ -13,11 +11,13 @@
         <cite title="Source Title"><%= @quote.author if @quote %></cite>
       </footer>
       <p>
-        <div id="user_star"></div>
+      <div id="user_star"></div>
       </p>
     </blockquote>
   </div>
 </div>
+
+<%= link_to 'Show next quote', root_path, class: 'btn btn-outline-info' %>
 
 <p></p>
 
