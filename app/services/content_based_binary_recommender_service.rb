@@ -69,13 +69,15 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     # choose the best quote to display
     best_quote_id = score_board.key(score_board.values.max)
 
-    # if we dont know users preference, return random quote
-    # this happens when there is no quote rating
-    best_quote_id = Quote.offset(rand(Quote.count)).first  if best_quote_id.nil?
-
-    # return the result quote
-    Quote.find best_quote_id
-
+    # if we dont know users preference, return random unseen quote
+    # this happens when there is no quote rating or no unseen quote in rated categories
+    if best_quote_id.nil?
+      unseen_quotes = Quote.all.pluck(:id) - user_viewed_quotes
+      Quote.find unseen_quotes.sample
+    else
+      # return best result
+      Quote.find best_quote_id
+    end
   end
 
   :private
