@@ -24,13 +24,15 @@
 <script>
     $('#user_star').raty({
         path: '/assets',
-        score: <%= @rating.user_rating %>,
+        // rating range [-2, 2]
+        // increment/decrement by 3 to put it on a scale of [1, 5]
+        score: <%= @rating.user_rating + 3 %>,
         click: function (user_rating, evt) {
             $.ajax({
                 url: '/ratings/' + <%= @quote.id %>,
                 beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
                 type: 'PATCH',
-                data: {user_rating: user_rating }
+                data: {user_rating: user_rating - 3}
             });
         }
     });

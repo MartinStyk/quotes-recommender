@@ -67,7 +67,7 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     end
 
     # choose the best quote to display
-    best_quote_id = score_board.key(score_board.values.max)
+    best_quote_id = score_board.key(score_board.values.max) if score_board.values.max > 0
 
     # if we dont know users preference, return random unseen quote
     # this happens when there is no quote rating or no unseen quote in rated categories
