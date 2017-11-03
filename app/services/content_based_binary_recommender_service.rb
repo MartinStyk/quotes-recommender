@@ -82,17 +82,21 @@ class ContentBasedBinaryRecommenderService < RecommenderService
 
   :private
 
+  # parameter: user_preferred_categories
+  # format: {cat_id => cat_preference}
+  # example: {5=>0.5, 6=>0.5, 7=>0.5, 8=>0.5}
   def quotes_by_categories(user_preferred_categories)
-    category_quotes_temp = QuoteCategory.where(category_id: user_preferred_categories.keys).pluck(:category_id, :quote_id)
+    category_quotes_temp = QuoteCategory.where(category_id: user_preferred_categories.keys)
+                                        .group_by(&:category_id)
+
     category_quotes = {}
 
-    category_quotes_temp.each do |category_id, quote_id|
-
-      category_quotes[category_id] = [] if category_quotes[category_id].nil?
-      category_quotes[category_id] << quote_id
-
+    category_quotes_temp.each do |category_id, quote_category_object|
+      category_quotes[category_id] = quote_category_object.map(&:quote_id)
     end
+
+    # return
+    # format: {cat_id => [q1_id,..,qn_id]}
+    category_quotes
   end
-
-
 end
