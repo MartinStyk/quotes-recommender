@@ -11,8 +11,8 @@ class RecommendQuote
                              RandomRecommenderService.new(user)
                            when user.content_based_binary?
                              ContentBasedBinaryRecommenderService.new(user)
-                           when user.strategy2?
-                             AnonymousRecommenderService.new(user)
+                           when user.global_popularity?
+                             GlobalPopularityRecommenderService.new(user)
                            end
                          end
 
