@@ -44,10 +44,8 @@ class ContentBasedBinaryRecommenderService < RecommenderService
 
     # quote.id -> number of categories quote belongs to
     categories_of_quote = QuoteCategory.where(quote_id: QuoteCategory.where(category_id: user_preferred_categories.keys)
-                                                            .map {|quote_categeory| quote_categeory.quote_id})
-                              .group(:quote_id).count
-
-
+                                                                     .pluck(:quote_id))
+                                       .group(:quote_id).count
     # for each quote which belongs to categories user has already preference, and user has not seen it before
     # compute quote ranking as a sum through all categories of (quote_in_category_ratio * user_preference_for_given_category * IDF)
 
@@ -92,7 +90,7 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     category_quotes = {}
 
     category_quotes_temp.each do |category_id, quote_category_object|
-      category_quotes[category_id] = quote_category_object.map(&:quote_id)
+      category_quotes[category_id] = quote_category_object.pluck(:quote_id)
     end
 
     # return
