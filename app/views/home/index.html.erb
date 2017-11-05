@@ -17,9 +17,9 @@
   </div>
 </div>
 
-<%= link_to 'Show next quote', root_path, class: 'btn btn-outline-info' %>
-
 <p></p>
+
+<%= button_to 'Show next quote', root_path, method: :get, class: 'btn btn-outline-info' %>
 
 <script>
     $('#user_star').raty({
