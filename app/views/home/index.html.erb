@@ -23,7 +23,9 @@
 
 <script>
     $('#user_star').raty({
-        path: '/assets',
+//        path: '/assets',
+        starOff: '<%= asset_path('star-off.png') %>',
+        starOn: '<%= asset_path('star-on.png') %>',
         // rating range [-2, 2]
         // increment/decrement by 3 to put it on a scale of [1, 5]
         score: <%= @rating.user_rating + 3 %>,
