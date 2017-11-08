@@ -72,7 +72,9 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     # if we dont know users preference, return random unseen quote
     # this happens when there is no quote rating or no unseen quote in rated categories
     if best_quote_id.nil?
-      unseen_quotes = Quote.all.pluck(:id) - user_viewed_quotes
+      all_quotes = Quote.all.pluck(:id)
+      # Consider all quotes as unseen quotes if the user has already viewed all quotes
+      unseen_quotes = (all_quotes - user_viewed_quotes).empty? ? all_quotes : (all_quotes - user_viewed_quotes)
       Quote.find unseen_quotes.sample
     else
       # return best result
