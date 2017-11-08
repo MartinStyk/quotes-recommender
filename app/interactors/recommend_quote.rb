@@ -1,3 +1,4 @@
+# app/interactors/recommend_quote.rb
 class RecommendQuote
   include Interactor
 
@@ -13,6 +14,8 @@ class RecommendQuote
                              ContentBasedBinaryRecommenderService.new(user)
                            when user.global_popularity?
                              GlobalPopularityRecommenderService.new(user)
+                           else
+                             AnonymousRecommenderService.new(user)
                            end
                          end
 

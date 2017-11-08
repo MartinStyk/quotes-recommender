@@ -1,3 +1,4 @@
+# app/services/random_recommender_service.rb
 class RandomRecommenderService < RecommenderService
   def initialize(params)
     super(params)

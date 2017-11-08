@@ -1,3 +1,4 @@
+# app/services/recommender_service.rb
 class RecommenderService
   def initialize(params)
     @user = params
@@ -6,7 +7,7 @@ class RecommenderService
   def show_next
     @quote = recommend_next
     ViewedQuote.create(quote_id: @quote.id,
-                        user_id: @user.id)
+                       user_id: @user.id)
     @quote
   end
 

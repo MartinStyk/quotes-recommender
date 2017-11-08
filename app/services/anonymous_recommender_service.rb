@@ -1,5 +1,4 @@
-# require 'recommender_service'
-
+# app/services/anonymous_recommender_service.rb
 class AnonymousRecommenderService < RecommenderService
   def initialize(params)
     super(params)

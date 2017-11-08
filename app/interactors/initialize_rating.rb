@@ -1,3 +1,4 @@
+# app/interactors/initialize_rating.rb
 class InitializeRating
   include Interactor
 

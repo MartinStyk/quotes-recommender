@@ -5,7 +5,6 @@ class RatingsController < ApplicationController
     @quote = Quote.find(params[:id])
 
     Rating.transaction do
-
       # in case we edit already existing rating, we need to adjust categories preferences for current user
       # we need to decrement it
       if Rating.exists?(quote_id: @quote.id, user_id: current_user.id)
@@ -18,11 +17,11 @@ class RatingsController < ApplicationController
         if @rating.update(user_rating: params[:user_rating])
           adjust_user_category_preference
           format.html
-          format.json {render :show, status: :ok, location: root_path}
+          format.json { render :show, status: :ok, location: root_path }
           format.js
         else
-          format.html {redirect_to root_path, notice: 'Rating was NOT successfully updated.'}
-          format.json {render json: @rating.errors, status: :unprocessable_entity}
+          format.html { redirect_to root_path, notice: 'Rating was NOT successfully updated.' }
+          format.json { render json: @rating.errors, status: :unprocessable_entity }
         end
         head :no_content
       end
@@ -46,5 +45,4 @@ class RatingsController < ApplicationController
       @user_category_preference.update(preference: preference_value)
     end
   end
-
 end

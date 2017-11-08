@@ -1,11 +1,8 @@
-# require 'recommender_service'
-
+# app/services/content_based_binary_recommender_service.rb
 class ContentBasedBinaryRecommenderService < RecommenderService
-
   def initialize(params)
     super(params)
   end
-
 
   # Create score board of all quotes available to recommend
   #
@@ -18,15 +15,14 @@ class ContentBasedBinaryRecommenderService < RecommenderService
   #
   # Quote with highest score is returned. If there is no rated quote, random is returned
   #
-  # TODO even bad rated category is currently better than non rated category
-  # TODO consider 1* as -2,...., 5* as +2 and we are done with this issue - this needs to be implemented
-  # TODO ratings controller on user preferred category save
+  # TODO: even bad rated category is currently better than non rated category
+  # TODO: consider 1* as -2,...., 5* as +2 and we are done with this issue - this needs to be implemented
+  # TODO: ratings controller on user preferred category save
   #
-  # TODO consider preference normalization?
+  # TODO: consider preference normalization?
   def recommend_next
-
     # quote.id -> expectation on how much user likes this quote
-    score_board = Hash.new
+    score_board = {}
 
     # number of all quotes in DB
     size_all_quotes = Quote.all.size
@@ -36,7 +32,9 @@ class ContentBasedBinaryRecommenderService < RecommenderService
 
     # categories user have already seen and rated quotes in them
     # category.id -> users preference for category
-    user_preferred_categories = UserCategoryPreference.where(user_id: @user.id).pluck(:category_id, :preference).to_h
+    user_preferred_categories = UserCategoryPreference.where(user_id: @user.id)
+                                                      .pluck(:category_id, :preference)
+                                                      .to_h
 
     # mapping from categories user has already rated to all quotes in given category
     # category.id -> ids of all quotes in given category
@@ -45,12 +43,12 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     # quote.id -> number of categories quote belongs to
     categories_of_quote = QuoteCategory.where(quote_id: QuoteCategory.where(category_id: user_preferred_categories.keys)
                                                                      .pluck(:quote_id))
-                                       .group(:quote_id).count
+                                       .group(:quote_id)
+                                       .count
     # for each quote which belongs to categories user has already preference, and user has not seen it before
     # compute quote ranking as a sum through all categories of (quote_in_category_ratio * user_preference_for_given_category * IDF)
 
     user_preferred_categories.each do |category_id, category_preference|
-
       # we recommend only unseen quotes
       quotes_in_current_category = quotes_in_category[category_id]
       considered_quotes = quotes_in_current_category - user_viewed_quotes
@@ -59,8 +57,8 @@ class ContentBasedBinaryRecommenderService < RecommenderService
         score_board[quote] = 0 if score_board[quote].nil?
 
         score_board[quote] +=
-            category_preference * 1 / Math.sqrt(categories_of_quote[quote]) *
-                Math.log10(size_all_quotes / quotes_in_current_category.size)
+          category_preference * 1 / Math.sqrt(categories_of_quote[quote]) *
+          Math.log10(size_all_quotes / quotes_in_current_category.size)
       end
     end
 
@@ -82,7 +80,7 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     end
   end
 
-  :private
+  private
 
   # parameter: user_preferred_categories
   # format: {cat_id => cat_preference}
