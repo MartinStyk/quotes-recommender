@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:danger] = exception.message
-    redirect_to root_path
+    redirect_back fallback_location: root_path
   end
 
   def after_sign_in_path_for(resource)
