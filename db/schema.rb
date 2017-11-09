@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109135737) do
+ActiveRecord::Schema.define(version: 20171109145737) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171109135737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "length", default: 0
+    t.integer "word_avg_length", default: 0
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -81,6 +82,15 @@ ActiveRecord::Schema.define(version: 20171109135737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_quote_length_preferences_on_user_id"
+  end
+
+  create_table "user_word_length_preferences", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "length"
+    t.float "preference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_word_length_preferences_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

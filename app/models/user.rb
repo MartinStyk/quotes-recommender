@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :user_category_preferences
   has_many :categories, through: :user_category_preferences
   has_many :user_quote_length_preferences
+  has_many :user_word_length_preferences
   enum strategy: [:random, :content_based_binary, :global_popularity]
 
   # Include default devise modules. Others available are:

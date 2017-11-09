@@ -8,14 +8,16 @@ class RecommendQuote
                            AnonymousRecommenderService.new(user)
                          else
                            case
-                           when user.random?
-                             RandomRecommenderService.new(user)
-                           when user.content_based_binary?
-                             ContentBasedBinaryRecommenderService.new(user)
-                           when user.global_popularity?
-                             GlobalPopularityRecommenderService.new(user)
-                           else
-                             AnonymousRecommenderService.new(user)
+                             when user.random?
+                               RandomRecommenderService.new(user)
+                             when user.content_based_binary?
+                               ContentBasedBinaryRecommenderService.new(user)
+                             when user.global_popularity?
+                               GlobalPopularityRecommenderService.new(user)
+                             when user.content_based_quote_length?
+                               ContentBasedQuoteLengthRecommenderService.new(user)
+                             else
+                               AnonymousRecommenderService.new(user)
                            end
                          end
 

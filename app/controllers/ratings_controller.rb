@@ -10,6 +10,7 @@ class RatingsController < ApplicationController
       if Rating.exists?(quote_id: @quote.id, user_id: current_user.id)
         adjust_user_category_preference Rating.find_by(quote_id: @quote.id, user_id: current_user.id), true
         adjust_user_quote_length_preference Rating.find_by(quote_id: @quote.id, user_id: current_user.id), true
+        adjust_user_word_length_preference Rating.find_by(quote_id: @quote.id, user_id: current_user.id), true
       end
 
       @rating = Rating.find_or_create_by!(quote_id: @quote.id, user_id: current_user.id)
@@ -18,6 +19,7 @@ class RatingsController < ApplicationController
         if @rating.update(user_rating: params[:user_rating])
           adjust_user_category_preference
           adjust_user_quote_length_preference
+          adjust_user_word_length_preference
           format.html
           format.json { render :show, status: :ok, location: root_path }
           format.js
@@ -68,6 +70,28 @@ class RatingsController < ApplicationController
       end
 
       @user_quote_length_preference.update(preference: preference_value)
+
+    end
+  end
+
+  def adjust_user_word_length_preference(rating = @rating, decrement = false)
+    adjustments = {}
+    adjustments[@quote.word_avg_length] = rating.user_rating
+    adjustments[@quote.word_avg_length + 1] = 0.8 * rating.user_rating
+    adjustments[@quote.word_avg_length - 1] = 0.8 * rating.user_rating
+    adjustments[@quote.word_avg_length + 2] = 0.4 * rating.user_rating
+    adjustments[@quote.word_avg_length - 2] = 0.4 * rating.user_rating
+
+    adjustments.each do |length, adjustment_value|
+      @user_word_length_preference = UserWordLengthPreference.find_or_create_by!(length: length, user_id: current_user.id)
+
+      if @user_word_length_preference.preference.present?
+        preference_value = decrement ? @user_word_length_preference.preference - adjustment_value : @user_word_length_preference.preference + adjustment_value
+      else
+        preference_value = adjustment_value
+      end
+
+      @user_word_length_preference.update(preference: preference_value)
 
     end
   end

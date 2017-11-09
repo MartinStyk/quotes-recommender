@@ -22,9 +22,21 @@ CSV.foreach(filename, headers: true) do |row|
     categories << Category.find_or_create_by!(name: category)
   end
 
+  #TODO count length, word_avg_length better
+
+  quote = row.to_h['text']
+  quote_words = quote.split
+
+  sum_size = 0
+  quote_words.each do |word|
+    sum_size += word.size
+  end
+
   quote_hash = Hash['author' => row.to_h['author'],
                     'text' => row.to_h['text'],
-                    'categories' => categories]
+                    'categories' => categories,
+                    'length' => quote_words.size,
+                    'word_avg_length' => sum_size/quote_words.size]
 
   Quote.create!(quote_hash)
 
