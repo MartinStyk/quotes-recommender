@@ -14,8 +14,8 @@ class RecommendQuote
                                ContentBasedBinaryRecommenderService.new(user)
                              when user.global_popularity?
                                GlobalPopularityRecommenderService.new(user)
-                             when user.content_based_quote_length?
-                               ContentBasedQuoteLengthRecommenderService.new(user)
+                             when user.content_based_quote_analysis?
+                               ContentBasedQuoteAnalysisRecommenderService.new(user)
                              else
                                AnonymousRecommenderService.new(user)
                            end
