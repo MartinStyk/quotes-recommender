@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109112029) do
+ActiveRecord::Schema.define(version: 20171109135737) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -72,6 +72,15 @@ ActiveRecord::Schema.define(version: 20171109112029) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_user_category_preferences_on_category_id"
     t.index ["user_id"], name: "index_user_category_preferences_on_user_id"
+  end
+
+  create_table "user_quote_length_preferences", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "length"
+    t.float "preference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_quote_length_preferences_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
