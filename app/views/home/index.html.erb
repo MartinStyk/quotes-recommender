@@ -19,7 +19,14 @@
 
 <p></p>
 
-<%= button_to 'Show next quote', root_path, method: :get, class: 'btn btn-outline-info' %>
+<div class="row">
+  <div class="col-sm-2 center-block">
+    <%= button_to 'Show next quote', root_path, method: :get, class: 'btn btn-outline-info' %>
+  </div>
+  <div class="col-sm-2 center-block">
+    <%= button_to 'Show something different', root_path, method: :get, params: {different: true}, class: 'btn btn-outline-info' %>
+  </div>
+</div>
 
 <script>
     $('#user_star').raty({
@@ -32,7 +39,9 @@
         click: function (user_rating, evt) {
             $.ajax({
                 url: '/ratings/' + <%= @quote.id %>,
-                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+                },
                 type: 'PATCH',
                 data: {user_rating: user_rating - 3}
             });

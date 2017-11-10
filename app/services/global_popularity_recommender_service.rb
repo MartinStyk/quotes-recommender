@@ -1,7 +1,8 @@
 # app/services/global_popularity_recommender_service.rb
 class GlobalPopularityRecommenderService < ScoreBoardRecommenderService
-  def initialize(params)
-    super(params)
+
+  def initialize(params, show_something_different = false)
+    super(params, show_something_different)
   end
 
   # Recommends unseen quotes with best ratings. (sum_ratings / num_ratings)

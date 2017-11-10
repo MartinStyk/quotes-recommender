@@ -4,6 +4,8 @@ class RecommendQuote
 
   def call
     user = context.user
+    show_different = context.show_different
+
     recommend_strategy = if user.nil?
                            AnonymousRecommenderService.new(user)
                          else
@@ -11,13 +13,13 @@ class RecommendQuote
                              when user.random?
                                RandomRecommenderService.new(user)
                              when user.content_based_binary?
-                               ContentBasedBinaryRecommenderService.new(user)
+                               ContentBasedBinaryRecommenderService.new(user, show_different)
                              when user.global_popularity?
-                               GlobalPopularityRecommenderService.new(user)
+                               GlobalPopularityRecommenderService.new(user, show_different)
                              when user.content_based_quote_analysis?
-                               ContentBasedQuoteAnalysisRecommenderService.new(user)
+                               ContentBasedQuoteAnalysisRecommenderService.new(user, show_different)
                              when user.content_based_mixed?
-                               ContentBasedMixedRecommenderService.new(user)
+                               ContentBasedMixedRecommenderService.new(user, show_different)
                              else
                                AnonymousRecommenderService.new(user)
                            end

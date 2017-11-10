@@ -1,7 +1,8 @@
 # app/services/content_based_binary_recommender_service.rb
 class ContentBasedMixedRecommenderService < LearningScoreBoardRecommenderService
-  def initialize(params)
-    super(params)
+
+  def initialize(params, show_something_different = false)
+    super(params, show_something_different)
   end
 
   # Recommendation based on number of words and length of words of quotean quote categories
