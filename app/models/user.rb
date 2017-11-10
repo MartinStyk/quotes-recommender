@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   rolify
   after_create :assign_default_role
+  after_create :assign_strategy
   has_many :identities
   has_many :ratings
   has_many :quotes, through: :ratings
@@ -20,6 +21,10 @@ class User < ApplicationRecord
 
   def assign_default_role
     add_role :user
+  end
+
+  def assign_strategy
+    self.update(strategy: User.strategies.to_h.values.sample)
   end
 
   def self.from_omniauth(access_token, current_user)
