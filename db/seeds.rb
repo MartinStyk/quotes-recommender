@@ -22,10 +22,11 @@ CSV.foreach(filename, headers: true) do |row|
     categories << Category.find_or_create_by!(name: category)
   end
 
-  #TODO count length, word_avg_length better
+  forbidden = ['a', 'the', 'in', 'on', 'I', 'you', 'we', 'he', 'she', 'it', 'to', 'at', 'is', 'are', 'by', 'of',
+  'and', 'or',]
 
   quote = row.to_h['text']
-  quote_words = quote.split
+  quote_words = quote.split.select {|word| !forbidden.include? word.downcase!}
 
   sum_size = 0
   quote_words.each do |word|
