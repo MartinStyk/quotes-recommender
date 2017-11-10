@@ -16,6 +16,8 @@ class RecommendQuote
                                GlobalPopularityRecommenderService.new(user)
                              when user.content_based_quote_analysis?
                                ContentBasedQuoteAnalysisRecommenderService.new(user)
+                             when user.content_based_mixed?
+                               ContentBasedMixedRecommenderService.new(user)
                              else
                                AnonymousRecommenderService.new(user)
                            end
