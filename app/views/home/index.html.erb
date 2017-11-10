@@ -23,9 +23,12 @@
   <div class="col-sm-2 center-block">
     <%= button_to 'Show next quote', root_path, method: :get, class: 'btn btn-outline-info' %>
   </div>
-  <div class="col-sm-2 center-block">
-    <%= button_to 'Show something different', root_path, method: :get, params: {different: true}, class: 'btn btn-outline-info' %>
-  </div>
+
+  <% if !current_user.nil? && ( current_user.content_based_category? || current_user.content_based_quote_analysis? || current_user.content_based_mixed? )%>
+      <div class="col-sm-2 center-block">
+        <%= button_to 'Show something different', root_path, method: :get, params: {different: true}, class: 'btn btn-outline-info' %>
+      </div>
+  <% end %>
 </div>
 
 <script>
