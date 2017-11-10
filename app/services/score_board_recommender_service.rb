@@ -42,7 +42,7 @@ class ScoreBoardRecommenderService < RecommenderService
   def randomize_result (score_board)
     # if there is no rated unseen quote, return random quote
     # if there is something in our scoreboard, return some quote from top 30 quotes
-    
+
     if score_board.size == 0 || score_board.values.uniq.length == 1
 
       unseen_quotes = @all_quotes - @seen_quotes
@@ -50,6 +50,19 @@ class ScoreBoardRecommenderService < RecommenderService
     else
       lower_bound = 30 < score_board.size ? 30 : score_board.size
       Quote.find score_board.keys[rand(0..lower_bound)]
+    end
+  end
+
+  # All scores normalized to value (0,1)
+  def normalize(score_board)
+    max = score_board.values.max
+    min = score_board.values.min
+
+
+    unless max == min
+      score_board.each do |key, value|
+        score_board[key] = (value - min) / (max - min)
+      end
     end
   end
 end

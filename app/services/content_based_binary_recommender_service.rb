@@ -34,23 +34,26 @@ class ContentBasedBinaryRecommenderService < LearningScoreBoardRecommenderServic
                                                                      .pluck(:quote_id))
                                        .group(:quote_id)
                                        .count
+    # init scoreboard
+    (@all_quotes - @seen_quotes).each do |quote_id|
+      score_board[quote_id] = 0
+    end
+
     # for each quote which belongs to categories user has already preference, and user has not seen it before
     # compute quote ranking as a sum through all categories of (quote_in_category_ratio * user_preference_for_given_category * IDF)
-
     user_preferred_categories.each do |category_id, category_preference|
       # we recommend only unseen quotes
       quotes_in_current_category = quotes_in_category[category_id]
       considered_quotes = quotes_in_current_category - @seen_quotes
 
       considered_quotes.each do |quote|
-        score_board[quote] = 0 if score_board[quote].nil?
-
         score_board[quote] +=
           category_preference * 1 / Math.sqrt(categories_of_quote[quote]) *
           Math.log10(size_all_quotes / quotes_in_current_category.size)
       end
     end
 
+    normalize score_board
     score_board.sort_by {|key, value| value}.reverse.to_h
   end
 

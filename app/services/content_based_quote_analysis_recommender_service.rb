@@ -63,19 +63,4 @@ class ContentBasedQuoteAnalysisRecommenderService < LearningScoreBoardRecommende
     merged_score_board.sort_by {|key, value| value}.reverse.to_h
   end
 
-
-  private
-
-  # All scores normalized to value (0,1)
-  def normalize(score_board)
-    max = score_board.values.max
-    min = score_board.values.min
-
-
-    unless max == min
-      score_board.each do |key, value|
-        score_board[key] = (value - min) / (max - min)
-      end
-    end
-  end
 end
