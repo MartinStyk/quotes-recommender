@@ -5,10 +5,7 @@ class AnonymousRecommenderService < RecommenderService
   end
 
   def show_next
-    choose_next_quote
+    @quote = Quote.all.sample
   end
 
-  def choose_next_quote
-    @quote = Quote.all.first
-  end
 end
