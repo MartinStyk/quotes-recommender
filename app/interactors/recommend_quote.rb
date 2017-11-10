@@ -12,8 +12,8 @@ class RecommendQuote
                            case
                              when user.random?
                                RandomRecommenderService.new(user)
-                             when user.content_based_binary?
-                               ContentBasedBinaryRecommenderService.new(user, show_different)
+                             when user.content_based_category?
+                               ContentBasedCategoryRecommenderService.new(user, show_different)
                              when user.global_popularity?
                                GlobalPopularityRecommenderService.new(user, show_different)
                              when user.content_based_quote_analysis?

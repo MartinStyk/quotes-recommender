@@ -1,5 +1,5 @@
 # app/services/content_based_binary_recommender_service.rb
-class ContentBasedBinaryRecommenderService < LearningScoreBoardRecommenderService
+class ContentBasedCategoryRecommenderService < LearningScoreBoardRecommenderService
 
   def initialize(params, show_something_different = false)
     super(params, show_something_different)

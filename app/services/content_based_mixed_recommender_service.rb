@@ -14,7 +14,7 @@ class ContentBasedMixedRecommenderService < LearningScoreBoardRecommenderService
   # Final score of quote is weighted  4:1 for category recommendation
   def compute_score_board
     score_board_quote_analysis = ContentBasedQuoteAnalysisRecommenderService.new(@user).compute_score_board
-    score_board_category_analysis = ContentBasedBinaryRecommenderService.new(@user).compute_score_board
+    score_board_category_analysis = ContentBasedCategoryRecommenderService.new(@user).compute_score_board
 
     merged_score_board = score_board_quote_analysis.merge(score_board_category_analysis) {|quote, score_quote, score_category| 0.2 * score_quote + 0.8 * score_category}
     merged_score_board.sort_by {|key, value| value}.reverse.to_h
