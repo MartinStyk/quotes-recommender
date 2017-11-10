@@ -5,11 +5,10 @@ class AnonymousRecommenderService < RecommenderService
   end
 
   def show_next
-    recommend_next
+    choose_next_quote
   end
 
-  def recommend_next
-    # TODO
+  def choose_next_quote
     @quote = Quote.all.first
   end
 end

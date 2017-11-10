@@ -5,7 +5,7 @@ class RandomRecommenderService < RecommenderService
   end
 
   # Returns random unseen quote
-  def recommend_next
+  def choose_next_quote
     all_quotes = Quote.all.pluck(:id)
     viewed_quotes = @user.viewed_quotes.pluck(:quote_id)
     # Consider all quotes as unseen quotes if the user has already viewed all quotes

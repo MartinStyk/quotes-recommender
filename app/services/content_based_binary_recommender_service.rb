@@ -1,5 +1,5 @@
 # app/services/content_based_binary_recommender_service.rb
-class ContentBasedBinaryRecommenderService < RecommenderService
+class ContentBasedBinaryRecommenderService < LearningScoreBoardRecommenderService
   def initialize(params)
     super(params)
   end
@@ -12,23 +12,12 @@ class ContentBasedBinaryRecommenderService < RecommenderService
   # Rating of a quote is computed as a sum of (category_preference * 1/sqrt(#categories_of_quote)) * IDF.
   #
   # IDF = log_10 (number of all quotes / DF), where DF is number of quotes in given category
-  #
-  # Quote with highest score is returned. If there is no rated quote, random is returned
-  #
-  # TODO: even bad rated category is currently better than non rated category
-  # TODO: consider 1* as -2,...., 5* as +2 and we are done with this issue - this needs to be implemented
-  # TODO: ratings controller on user preferred category save
-  #
-  # TODO: consider preference normalization?
-  def recommend_next
+  def compute_score_board
     # quote.id -> expectation on how much user likes this quote
     score_board = {}
 
     # number of all quotes in DB
-    size_all_quotes = Quote.all.size
-
-    # ids of all quotes current user has already seen
-    user_viewed_quotes = @user.viewed_quotes.pluck(:quote_id)
+    size_all_quotes = @all_quotes.size
 
     # categories user have already seen and rated quotes in them
     # category.id -> users preference for category
@@ -51,7 +40,7 @@ class ContentBasedBinaryRecommenderService < RecommenderService
     user_preferred_categories.each do |category_id, category_preference|
       # we recommend only unseen quotes
       quotes_in_current_category = quotes_in_category[category_id]
-      considered_quotes = quotes_in_current_category - user_viewed_quotes
+      considered_quotes = quotes_in_current_category - @seen_quotes
 
       considered_quotes.each do |quote|
         score_board[quote] = 0 if score_board[quote].nil?
@@ -62,22 +51,7 @@ class ContentBasedBinaryRecommenderService < RecommenderService
       end
     end
 
-    # choose the best quote to display
-    best_quote_id = if !score_board.empty? && score_board.values.max > 0
-                      score_board.key(score_board.values.max)
-                    end
-
-    # if we dont know users preference, return random unseen quote
-    # this happens when there is no quote rating or no unseen quote in rated categories
-    if best_quote_id.nil?
-      all_quotes = Quote.all.pluck(:id)
-      # Consider all quotes as unseen quotes if the user has already viewed all quotes
-      unseen_quotes = (all_quotes - user_viewed_quotes).empty? ? all_quotes : (all_quotes - user_viewed_quotes)
-      Quote.find unseen_quotes.sample
-    else
-      # return best result
-      Quote.find best_quote_id
-    end
+    score_board.sort_by {|key, value| value}.reverse.to_h
   end
 
   private
