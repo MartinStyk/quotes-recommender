@@ -1,4 +1,4 @@
-# app/services/recommender_service.rb
+# app/services/score_board_recommender_service.rb
 class ScoreBoardRecommenderService < RecommenderService
 
   def initialize(params, show_something_different = false)

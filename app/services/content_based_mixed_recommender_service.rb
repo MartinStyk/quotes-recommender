@@ -1,4 +1,4 @@
-# app/services/content_based_binary_recommender_service.rb
+# app/services/content_based_mixed_recommender_service.rb
 class ContentBasedMixedRecommenderService < LearningScoreBoardRecommenderService
 
   def initialize(params, show_something_different = false)
