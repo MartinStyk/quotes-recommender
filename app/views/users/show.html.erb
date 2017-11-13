@@ -1,35 +1,46 @@
-<h3>User</h3>
-
-<p>Email: <%= @user.email if @user.email %></p>
+<h3>Your statistics</h3>
 
 <p>Viewed quotes: <%= @user.viewed_quotes.size %></p>
 <p>Ratings: <%= @user.ratings.size %></p>
 
-<%= form_with(model: @user, local: true) do |form| %>
-    <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<hr>
 
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+<h3>Login info</h3>
 
-    <div class="field">
-      <%= form.label :strategy %>
-      <%= form.select :strategy, User.strategies.map {|k, v| [k.humanize.capitalize, k]} %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit %>
-    </div>
-<% end %>
-
+<p>Email: <%= @user.email if @user.email %></p>
 <p>Name: <%= @user.name if @user.name %></p>
-
 <p>
-  Provider: <%= @user.identities.map {|identity| identity.provider }.join(', ') %>
+  Provider: <%= @user
+                .identities
+                .map { |identity| identity.provider.capitalize }
+                .join(', ') %>
 </p>
+
+<hr>
+
+<% if current_user.has_role? :admin %>
+  <h3>Recommender strategy</h3>
+  <%= form_with(model: @user, local: true) do |form| %>
+      <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :strategy %>
+        <%= form.select :strategy, User.strategies.map {|k, v| [k.humanize.capitalize, k]} %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+  <% end %>
+  <hr>
+<% end %>

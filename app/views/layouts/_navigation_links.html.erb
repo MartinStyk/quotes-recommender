@@ -1,12 +1,16 @@
 <%# add navigation links to this file %>
-<li>
-  <a class="nav-link" href=<%= quotes_path %>>Quotes</a>
-</li>
 <% if user_signed_in? %>
   <li>
     <a class="nav-link" href=<%= viewed_quotes_path %>>Viewed Quotes</a>
   </li>
   <% if current_user.has_role? :admin %>
+    <li>
+      <%= link_to 'Quotes',
+                  quotes_path,
+                  method: :get,
+                  data: { confirm: 'Use with caution! It may take a while..' },
+                  class: 'nav-link' %>
+    </li>
     <li>
       <a class="nav-link" href=<%= categories_path %>>Categories</a>
     </li>
