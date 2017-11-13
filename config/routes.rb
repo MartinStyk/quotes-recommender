@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :ratings, only: [:update]
   resources :categories
   resources :quotes
-  resources :viewed_quotes, only: [:index]
+  resources :viewed_quotes, only: [:index] do
+    get 'filter/:name' => 'viewed_quotes#filter', on: :collection
+  end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users, only: [:index, :show, :update]
 

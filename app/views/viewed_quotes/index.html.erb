@@ -17,7 +17,7 @@
         <td><%= count %></td>
         <td><%= quote.author %></td>
         <td><%= quote.text %></td>
-        <td><%= quote.categories.map {|cat| cat.name}.join(', ') %></td>
+        <td><%= raw(quote.categories.map {|cat| raw(link_to cat.name, '/viewed_quotes/filter/'+ cat.name)}.join(', ')) %></td>
         <td><%= link_to 'Show', quote %></td>
         <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
         <td><%= link_to 'Destroy', quote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
