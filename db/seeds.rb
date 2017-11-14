@@ -8,7 +8,7 @@
 
 require 'csv'
 
-filename = 'data/quotes_filtered_2.csv'
+filename = 'data/quotes879.csv'
 
 puts '**  Seeding Database: seeding ***'
 puts 'Importing file ' + filename
