@@ -9,7 +9,7 @@ class GlobalPopularityRecommenderService < ScoreBoardRecommenderService
   def compute_score_board
 
     # get all rated quotes
-    rated_quotes = Rating.all.pluck('DISTINCT quote_id')
+    rated_quotes = Rating.all.pluck(:quote_id).uniq
 
     # consider only unseen quotes
     # array containing data for rating computation [quote_id, sum_of_ratings, number_of_ratings]
