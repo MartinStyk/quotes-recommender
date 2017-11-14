@@ -18,9 +18,21 @@
         <td><%= quote.author %></td>
         <td><%= quote.text %></td>
         <td><%= raw(quote.categories.map {|cat| raw(link_to cat.name, '/viewed_quotes/filter/'+ cat.name)}.join(', ')) %></td>
-        <td><%= link_to 'Show', quote %></td>
-        <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
-        <td><%= link_to 'Destroy', quote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% if can? :read, quote %>
+            <%= link_to 'Show', quote %>
+          <% end %>
+        </td>
+        <td>
+          <% if can? :update, quote %>
+            <%= link_to 'Edit', edit_quote_path(quote) %>
+          <% end %>
+        </td>
+        <td>
+          <% if can? :destroy, quote %>
+            <%= link_to 'Destroy', quote, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

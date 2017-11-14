@@ -19,15 +19,15 @@
 
 <p></p>
 
-<div class="row">
-  <div class="col-sm-2 center-block">
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
     <%= button_to 'Show next quote', root_path, method: :get, class: 'btn btn-outline-info' %>
   </div>
 
   <% if !current_user.nil? && ( current_user.content_based_category? || current_user.content_based_quote_analysis? || current_user.content_based_mixed? )%>
-      <div class="col-sm-2 center-block">
-        <%= button_to 'Show something different', root_path, method: :get, params: {different: true}, class: 'btn btn-outline-info' %>
-      </div>
+    <div class="btn-group mr-2" role="group" aria-label="Second group">
+      <%= button_to 'Show something different', root_path, method: :get, params: {different: true}, class: 'btn btn-outline-info' %>
+    </div>
   <% end %>
 </div>
 

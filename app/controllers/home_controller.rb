@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-
     show_different = !recommend_params[:different].nil? && recommend_params[:different]
 
     @quote = InitializeQuote.call(user: current_user, show_different: show_different).result

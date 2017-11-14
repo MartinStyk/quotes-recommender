@@ -5,6 +5,9 @@ class ViewedQuotesController < ApplicationController
   def index
     viewed_quotes = ViewedQuote.where(user_id: current_user.id)
     @quote_count_hash = compute_quote_count_hash viewed_quotes
+
+    flash_message = 'Well done! You have already viewed ' + @quote_count_hash.length.to_s + ' unique quotes.'
+    flash[:primary] = flash_message if @quote_count_hash.length >= 5
   end
 
   def filter

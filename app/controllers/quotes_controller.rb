@@ -1,7 +1,6 @@
 class QuotesController < ApplicationController
   before_action :set_quote, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
-  skip_authorize_resource only: [:show]
 
   # GET /quotes
   # GET /quotes.json
