@@ -9,7 +9,11 @@ class Ability
       can :manage, :all
     else
       cannot :manage, Quote
-      can :read, ViewedQuote
+      # :read is not enough, because we want to enable also
+      # 'filter' action
+      # restriction conditions might not apply since we 'convert'
+      # ViewedQuote to Quote
+      can :manage, ViewedQuote, user: user
       can :manage, Rating, user: user
       can :show, User, id: user.id
     end
