@@ -13,7 +13,10 @@
  */
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-@import "bootstrap";
+@import 'bootstrap';
+@import 'bootstrap-social';
+@import 'font-awesome';
+@import 'login';
 
 body {
   // HACK: top nav bar blocking top content of the page
