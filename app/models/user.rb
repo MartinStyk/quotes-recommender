@@ -19,6 +19,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
+  # Ultimate overriding Rememberable module to automatically
+  # remember all users just after sign-up
+  def remember_me
+    true
+  end
+
   def assign_default_role
     add_role :user
   end
