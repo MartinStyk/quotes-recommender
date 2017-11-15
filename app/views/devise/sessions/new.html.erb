@@ -1,7 +1,16 @@
+<style>
+  body{
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-image: url("https://farm4.staticflickr.com/3735/12658290004_fea155b929_o.jpg");
+  }
+</style>
+
 <div class='registration-panel'>
   <div id="my-card-override" class="card">
     <div class="card-body">
-      <h4 class="card-title mb-4 text-center">Log In</h4>
+      <h4 class="card-title mb-4 text-center text-light">Log In</h4>
 
       <%= link_to user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-social btn-facebook' do %>
         <span class="fa fa-facebook-square"></span> Log in using Facebook
@@ -13,7 +22,7 @@
     </div>
 
     <div class="card-body text-center">
-      <h4 class="card-subtitle mb-4 text-muted text-center">Or log in with email</h4>
+      <h4 class="card-subtitle mb-4 text-light text-center">Or log in with email</h4>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group mb-2">
@@ -25,7 +34,7 @@
         </div>
 
         <% if devise_mapping.rememberable? -%>
-          <div class="form-group text-justify">
+          <div class="form-group text-justify text-muted">
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me %>
           </div>
@@ -39,7 +48,7 @@
       <hr>
 
       <div class="h6">
-        <%= link_to 'Or sign up with your email address', new_user_registration_path %>
+        <%= link_to 'Or sign up with your email address', new_user_registration_path, class: 'text-muted' %>
       </div>
     </div>
   </div>

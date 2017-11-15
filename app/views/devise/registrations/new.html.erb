@@ -1,7 +1,16 @@
+<style>
+  body{
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-image: url("https://farm4.staticflickr.com/3726/12657946083_d667b504f2_o.jpg");
+  }
+</style>
+
 <div class='registration-panel'>
   <div id="my-card-override" class="card">
     <div class="card-body">
-      <h4 class="card-title mb-4 text-center">Sign Up</h4>
+      <h4 class="card-title mb-4 text-center text-light">Sign Up</h4>
 
       <%= link_to user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-social btn-facebook' do %>
           <span class="fa fa-facebook-square"></span> Sign up using Facebook
@@ -13,7 +22,7 @@
     </div>
 
     <div class="card-body text-center">
-      <h4 class="card-subtitle mb-4 text-muted text-center">Or sign up with email</h4>
+      <h4 class="card-subtitle mb-4 text-light text-center">Or sign up with email</h4>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
@@ -36,4 +45,9 @@
       <% end %>
     </div>
   </div>
+  <!-- Break lines for background image positioning HACK -->
+  <br>
+  <br>
+  <br>
+  <br>
 </div>

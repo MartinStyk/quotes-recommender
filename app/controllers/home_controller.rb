@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:about]
 
   def index
     show_different = !recommend_params[:different].nil? && recommend_params[:different]
@@ -25,6 +25,9 @@ class HomeController < ApplicationController
     @category4 = Category.find(rand(Category.count) + 1)
     @category5 = Category.find(rand(Category.count) + 1)
     @category6 = Category.find(rand(Category.count) + 1)
+  end
+
+  def about
   end
 
   def recommend_params
