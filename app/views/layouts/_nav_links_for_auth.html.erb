@@ -16,16 +16,22 @@
     </div>
   </li>
 <% else %>
-  <li  class="nav-item">
-    <a class="nav-link" href=<%= user_facebook_omniauth_authorize_path %>>Log in with Facebook</a>
-  </li>
-  <li  class="nav-item">
-    <a class="nav-link" href=<%= user_google_oauth2_omniauth_authorize_path %>>Log in with Google</a>
+  <% unless current_page?('/users/sign_up')%>
+    <li class="nav-item">
+      <a class="nav-link" href=<%= new_user_registration_path %>>Sign up:</a>
+    </li>
+  <% end %>
+  <% unless current_page?('/users/sign_in')%>
+    <li class="nav-item">
+      <a class="nav-link" href=<%= new_user_session_path %>>Login:</a>
+    </li>
+  <% end %>
+  <li class="nav-item">
+    <a class="nav-link" href=<%= user_facebook_omniauth_authorize_path %>>
+      <span class="fa fa-facebook"></span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href=<%= new_user_registration_path %>>Sign up</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href=<%= new_user_session_path %>>Login</a>
+    <a class="nav-link" href=<%= user_google_oauth2_omniauth_authorize_path %>>
+      <span class="fa fa-google-plus"></span></a>
   </li>
 <% end %>
