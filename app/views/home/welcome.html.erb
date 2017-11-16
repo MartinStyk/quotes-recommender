@@ -11,3 +11,59 @@
 <%= button_to @categories[4].name, home_index_path, method: :get, params: {category: @categories[4].id}, class: 'btn btn-info btn-lg btn-block' %>
 <p></p>
 <%= button_to @categories[5].name, home_index_path, method: :get, params: {category: @categories[5].id}, class: 'btn btn-dark btn-lg btn-block' %>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <%= button_to home_index_path, method: :get, params: {category: @categories[0].id} do %>
+          <div class="tile purple">
+            <h3 class="title"><%= @categories[0].name %></h3>
+            <p><%= @categories[0].quotes.size %> quotes in this category </p>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <%= button_to home_index_path, method: :get, params: {category: @categories[1].id} do %>
+          <div class="tile red">
+            <h3 class="title"><%= @categories[1].name %></h3>
+            <p><%= @categories[1].quotes.size %> quotes in this category </p>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <%= button_to home_index_path, method: :get, params: {category: @categories[2].id} do %>
+          <div class="tile orange">
+            <h3 class="title"><%= @categories[2].name %></h3>
+            <p><%= @categories[2].quotes.size %> quotes in this category </p>
+          </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <%= button_to home_index_path, method: :get, params: {category: @categories[3].id} do %>
+          <div class="tile green">
+            <h3 class="title"><%= @categories[3].name %></h3>
+            <p><%= @categories[3].quotes.size %> quotes in this category </p>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <%= button_to home_index_path, method: :get, params: {category: @categories[4].id} do %>
+          <div class="tile blue">
+            <h3 class="title"><%= @categories[4].name %></h3>
+            <p><%= @categories[4].quotes.size %> quotes in this category </p>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <%= button_to home_index_path, method: :get, params: {category: @categories[5].id} do %>
+          <div class="tile yellow">
+            <h3 class="title"><%= @categories[5].name %></h3>
+            <p><%= @categories[5].quotes.size %> quotes in this category </p>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
