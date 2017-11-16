@@ -19,12 +19,7 @@ class HomeController < ApplicationController
   end
 
   def welcome
-    @category1 = Category.find(rand(Category.count) + 1)
-    @category2 = Category.find(rand(Category.count) + 1)
-    @category3 = Category.find(rand(Category.count) + 1)
-    @category4 = Category.find(rand(Category.count) + 1)
-    @category5 = Category.find(rand(Category.count) + 1)
-    @category6 = Category.find(rand(Category.count) + 1)
+    @categories = Category.all.shuffle.first(6)
   end
 
   def about
