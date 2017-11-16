@@ -19,7 +19,7 @@ class HomeController < ApplicationController
   end
 
   def welcome
-    @categories = Category.all.shuffle.first(6)
+    @categories = Category.all.shuffle.first(8)
   end
 
   def about
