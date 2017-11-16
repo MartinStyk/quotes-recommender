@@ -21,7 +21,7 @@
 
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group mr-2" role="group" aria-label="First group">
-    <%= button_to 'Show next quote', home_index_path, method: :get, class: 'btn btn-outline-info' %>
+    <%= button_to 'Show next recommended quote', home_index_path, method: :get, class: 'btn btn-info' %>
   </div>
 
   <% if !current_user.nil? && ( current_user.content_based_category? || current_user.content_based_quote_analysis? || current_user.content_based_mixed? )%>
