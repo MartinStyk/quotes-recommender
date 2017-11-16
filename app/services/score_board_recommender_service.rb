@@ -43,7 +43,7 @@ class ScoreBoardRecommenderService < RecommenderService
 
   # brings a little randomization to results
   # if @show_something_different is set to false
-  #   -return random quote from top 30.
+  #   -return random quote from top 50
   # if @show_something_different is set to false
   #   -Select random quote from 30% - 60% best quotes
   def randomize_result (score_board)
@@ -59,7 +59,7 @@ class ScoreBoardRecommenderService < RecommenderService
       upper_bound = (score_board.size * 0.7).round
       Quote.find score_board.keys[rand(lower_bound..upper_bound)]
     else
-      lower_bound = 30 < score_board.size ? 30 : score_board.size
+      lower_bound = 50 < score_board.size ? 50 : score_board.size
       Quote.find score_board.keys[rand(0..lower_bound)]
     end
 
