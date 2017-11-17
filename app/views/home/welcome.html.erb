@@ -1,5 +1,5 @@
 <h2 class="text-center">Select initial quote category</h2>
-<p></p>
+<br>
 <div class="container">
   <div class="row">
     <% @categories.each do |category| %>
@@ -7,7 +7,7 @@
         <%= button_to home_index_path, method: :get, params: {category: category.id}, class: 'category_btn' do %>
           <div class="tile btn-outline-info">
             <h3 class="title"><%= category.name %></h3>
-            <p><%= category.quotes.size %> quotes in this category </p>
+            <p><%= pluralize(category.quotes.size, 'quote') %> in this category </p>
           </div>
         <% end %>
       </div>
