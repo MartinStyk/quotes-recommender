@@ -10,7 +10,8 @@
     <th>Email</th>
     <th>Strategy</th>
     <th>Ratings</th>
-    <th colspan="6"></th>
+    <th>%</th>
+    <th colspan="7"></th>
   </tr>
   </thead>
 
@@ -24,6 +25,7 @@
         <td><%= user.email %></td>
         <td><%= user.strategy.capitalize %></td>
         <td><%= user.ratings.count %></td>
+        <td><%= (user.ratings.count.to_f / (user.viewed_quotes.count.nonzero? || 1) * 100).floor %></td>
         <td><%= link_to 'Show', user %></td>
       </tr>
   <% end %>
