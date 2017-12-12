@@ -68,8 +68,9 @@ This is list of all recommender services, you can find additional comments direc
 * [content_based_mixed_recommender_service](https://github.com/MartinStyk/quotes-recommender/blob/master/app/services/content_based_mixed_recommender_service.rb) - combines ``content_based_category_recommender_service`` and  ``content_based_quote_analysis_recommender_service``. It merges scoreboards computed by these services. Category has priority with 80% in final score, while text style has only 20%.
 
 #### List of other important files
-* Database schema - [db/schema.rb] (https://github.com/MartinStyk/quotes-recommender/blob/master/db/schema.rb)
-* Script for quotes download - [scripts/quotes_finder.rb] (https://github.com/MartinStyk/quotes-recommender/blob/master/scripts/quotes_finder.rb)
+* Database schema - [db/schema.rb](https://github.com/MartinStyk/quotes-recommender/blob/master/db/schema.rb)
+
+* Script for quotes download - [scripts/quotes_finder.rb](https://github.com/MartinStyk/quotes-recommender/blob/master/scripts/quotes_finder.rb)
 
 ## Execution & development
 
