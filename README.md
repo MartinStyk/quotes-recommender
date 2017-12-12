@@ -38,7 +38,7 @@ Controllers important for recommendations
 
 
 #### Interactors
-Interactors which are important for recommendations
+Interactors which are important for recommendations, located in [app/interactors](./app/interactors) directory.
 
 * [initialize_quote](./app/interactors/initialize_quote.rb) - this interactor is triggered from home_controller. It delegates recommendation work to [recommend_quote](./app/interactors/recommend_quote.rb) interactor.
 
@@ -68,9 +68,12 @@ This is a list of all recommender services, you can find additional comments dir
 * [content_based_mixed_recommender_service](./app/services/content_based_mixed_recommender_service.rb) - combines ``content_based_category_recommender_service`` and  ``content_based_quote_analysis_recommender_service``. It merges scoreboards computed by these services. Category has priority with 80% in final score, while text style has only 20%.
 
 #### List of other important files
+
 * Database schema - [db/schema.rb](./db/schema.rb)
 
 * Script for quotes download - [scripts/quotes_finder.rb](./scripts/quotes_finder.rb)
+
+* Quotes data (original and filtered) - [data](./data) directory
 
 ## Execution & development
 
